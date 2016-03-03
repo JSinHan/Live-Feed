@@ -7,49 +7,52 @@
 //
 
 #import "TableViewController.h"
+#import "News.h"
+#import "NewsCell.h"
 
 @interface TableViewController ()
+
+@property (nonatomic, strong) NSArray *allNews;
 
 @end
 
 @implementation TableViewController
 
+- (NSArray *)allNews{
+    if (!_allNews) {
+        _allNews = [News demoData];
+        
+    }
+    return _allNews;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return self.allNews.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewsCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    News *news = self.allNews[indexPath.row];
+    cell.news = news;
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
